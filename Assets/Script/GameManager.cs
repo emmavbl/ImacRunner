@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum Level
+{
+    Outside,
+    Inside
+}
+
 public class GameManager : MonoBehaviour
 {
 
@@ -11,7 +17,10 @@ public class GameManager : MonoBehaviour
     static public int highScore;
     public static GameManager inst;
 
-    private void Awake()
+    public Level level = Level.Outside;
+    [SerializeField] int numberOfGroundSpawnInLevel = 20;
+
+	private void Awake()
     {
         Debug.Log("Awake");
         if (inst == null)
@@ -55,14 +64,30 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<PlayerController>().speed += FindObjectOfType<PlayerController>().speedIncreasePerPoint;
     }
 
+    // Decrement level time and check if null for the next level to spawn
+    public void newSpawn()
+	{
+        numberOfGroundSpawnInLevel--;
+        if (numberOfGroundSpawnInLevel <= 0)
+		{
+            // random on new level
+            level = Level.Inside;
+
+            // random on level duration
+
+		}
+	}
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //initialise le niveau 
+        level = Level.Outside;
+        numberOfGroundSpawnInLevel = 20;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }

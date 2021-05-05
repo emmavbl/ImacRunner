@@ -6,6 +6,8 @@ public class GroundSpawner : MonoBehaviour
 {
 
     [SerializeField] GameObject groundTile;
+    [SerializeField] GameObject InsideTile;
+    [SerializeField] GameObject OutsideTile;
     Vector3 nextSpawnPoint;
 
     // Start is called before the first frame update
@@ -27,16 +29,33 @@ public class GroundSpawner : MonoBehaviour
 
     public void spawnTile(bool spawnObstacle)
 	{
-        GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
-        nextSpawnPoint = temp.transform.GetChild(1).transform.position;
+
+        GameObject temp;
+        //GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+
+		if (GameObject.FindObjectOfType<GameManager>().level == Level.Outside)
+		{
+            temp = Instantiate(OutsideTile, nextSpawnPoint, Quaternion.identity);
+		} else
+		{
+            temp = Instantiate(InsideTile, nextSpawnPoint, Quaternion.identity);
+        }
+
+        nextSpawnPoint = temp.transform.Find("SpawnPoint").transform.position;
 		if (spawnObstacle)
 		{
             temp.GetComponent<Ground>().spawnObstacle();
             temp.GetComponent<Ground>().spawnObstacle();
 		}
         temp.GetComponent<Ground>().spawnCoin();
-        temp.GetComponent<Ground>().spawnTree();
 
+        if (GameObject.FindObjectOfType<GameManager>().level == Level.Outside)
+        {
+            temp.GetComponent<Ground>().spawnTree();
+        }
+
+
+        GameObject.FindObjectOfType<GameManager>().newSpawn();
     }
 
 }
