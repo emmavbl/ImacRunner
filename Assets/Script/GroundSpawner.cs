@@ -54,7 +54,7 @@ public class GroundSpawner : MonoBehaviour
             temp.GetComponent<Ground>().spawnTree();
         }
 
-
+        // alert GameManager we spawn a new ground 
         GameObject.FindObjectOfType<GameManager>().newSpawn();
     }
 

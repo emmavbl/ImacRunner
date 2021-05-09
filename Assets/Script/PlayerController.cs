@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<GameManager>().resetScore();
+        FindObjectOfType<GameManager>().resetGame();
+
     }
 
     // Update is called once per frame

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public static GameManager inst;
 
     public Level level = Level.Outside;
-    [SerializeField] int numberOfGroundSpawnInLevel = 20;
+    [SerializeField] int groundLeft = 20; // number of ground spawn left before next level
 
 	private void Awake()
     {
@@ -42,9 +42,14 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    public void resetScore()
+    public void resetGame()
     {
+        // reset score
         score = 0;
+
+        // reset level
+        level = Level.Outside;
+        groundLeft = 20;
     }
 
     public void setText()
@@ -67,13 +72,14 @@ public class GameManager : MonoBehaviour
     // Decrement level time and check if null for the next level to spawn
     public void newSpawn()
 	{
-        numberOfGroundSpawnInLevel--;
-        if (numberOfGroundSpawnInLevel <= 0)
+        groundLeft--;
+        if (groundLeft <= 0)
 		{
             // random on new level
-            level = Level.Inside;
+            level = level == Level.Inside ? Level.Outside : Level.Inside;
 
             // random on level duration
+            groundLeft = 20;
 
 		}
 	}
@@ -81,9 +87,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //initialise le niveau 
-        level = Level.Outside;
-        numberOfGroundSpawnInLevel = 20;
     }
 
     // Update is called once per frame
