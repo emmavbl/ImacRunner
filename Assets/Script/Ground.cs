@@ -7,6 +7,7 @@ public class Ground : MonoBehaviour
     GroundSpawner spawner;
     [SerializeField] GameObject obstacle;
     [SerializeField] GameObject coin;
+    [SerializeField] GameObject ticket;
     [SerializeField] GameObject[] trees;
 
     // Start is called before the first frame update
@@ -36,7 +37,10 @@ public class Ground : MonoBehaviour
         position.x = Random.Range(-1, 2) * (10/3);
         position.y = 0.7f;
 
-        Instantiate(coin, position, Quaternion.identity, transform);
+        //get random type of coin here
+        GameObject toInstance = Random.Range(0.0f,1.0f) > 0.5 ? coin : ticket;
+
+        Instantiate(toInstance, position, Quaternion.identity, transform);
     }
 
     public void spawnTree()
