@@ -25,7 +25,7 @@ public class Ground : MonoBehaviour
     public void spawnObstacle()
 	{
         Vector3 position = transform.position;
-        position.x = Random.Range(-1, 2) * (10/3);
+        position.x = Random.Range(-1, 2) * (10/3); // random between a b and c position
         position.y = 0.5f;
         position.z = position.z + 5;
         Instantiate(obstacle, position, Quaternion.identity, transform);
@@ -34,7 +34,7 @@ public class Ground : MonoBehaviour
     public void spawnCoin()
     {
         Vector3 position = transform.position;
-        position.x = Random.Range(-1, 2) * (10/3);
+        position.x = Random.Range(-1, 2) * (10/3); // random between a b and c position
         position.y = 0.7f;
 
         //get random type of coin here

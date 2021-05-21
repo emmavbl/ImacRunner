@@ -44,6 +44,7 @@ public class GroundSpawner : MonoBehaviour
         nextSpawnPoint = temp.transform.Find("SpawnPoint").transform.position;
 		if (spawnObstacle)
 		{
+            // random how many obstacles
             temp.GetComponent<Ground>().spawnObstacle();
             temp.GetComponent<Ground>().spawnObstacle();
 		}

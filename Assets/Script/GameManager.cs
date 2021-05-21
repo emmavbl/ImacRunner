@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             // random on new level
             level = level == Level.Inside ? Level.Outside : Level.Inside;
 
-            // random on level duration
+            // random on level duration (int), between [3, 25]
             groundLeft = 20;
 
 		}
