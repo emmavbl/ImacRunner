@@ -6,8 +6,9 @@ public class GroundSpawner : MonoBehaviour
 {
 
     [SerializeField] GameObject groundTile;
-    [SerializeField] GameObject InsideTile;
-    [SerializeField] GameObject OutsideTile;
+    [SerializeField] GameObject insideTile;
+    [SerializeField] GameObject outsideTile;
+    [SerializeField] GameObject cityTile;
     Vector3 nextSpawnPoint;
 
     // Start is called before the first frame update
@@ -31,14 +32,23 @@ public class GroundSpawner : MonoBehaviour
 	{
 
         GameObject temp;
-        //GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+		//GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
 
-		if (GameObject.FindObjectOfType<GameManager>().level == Level.Outside)
+		switch (GameObject.FindObjectOfType<GameManager>().level)
 		{
-            temp = Instantiate(OutsideTile, nextSpawnPoint, Quaternion.identity);
-		} else
-		{
-            temp = Instantiate(InsideTile, nextSpawnPoint, Quaternion.identity);
+            case Level.Forest:
+                temp = Instantiate(outsideTile, nextSpawnPoint, Quaternion.identity);
+                temp.GetComponent<Ground>().spawnTree();
+                break;
+            case Level.Classroom:
+                temp = Instantiate(insideTile, nextSpawnPoint, Quaternion.identity);
+                break;
+            case Level.City:
+                temp = Instantiate(cityTile, nextSpawnPoint, Quaternion.identity);
+                break;
+            default:
+                temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+                break;
         }
 
         nextSpawnPoint = temp.transform.Find("SpawnPoint").transform.position;
@@ -48,12 +58,8 @@ public class GroundSpawner : MonoBehaviour
             temp.GetComponent<Ground>().spawnObstacle();
             temp.GetComponent<Ground>().spawnObstacle();
 		}
-        temp.GetComponent<Ground>().spawnCoin();
 
-        if (GameObject.FindObjectOfType<GameManager>().level == Level.Outside)
-        {
-            temp.GetComponent<Ground>().spawnTree();
-        }
+        temp.GetComponent<Ground>().spawnCoin();
 
         // alert GameManager we spawn a new ground 
         GameObject.FindObjectOfType<GameManager>().newSpawn();

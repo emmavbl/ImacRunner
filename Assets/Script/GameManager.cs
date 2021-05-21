@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public enum Level
 {
-    Outside,
-    Inside
+    Forest,
+    Classroom,
+    City
 }
 
 public class GameManager : MonoBehaviour
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     static public int highScore;
     public static GameManager inst;
 
-    public Level level = Level.Outside;
+    public Level level = Level.Forest;
     [SerializeField] int groundLeft = 20; // number of ground spawn left before next level
 
 	private void Awake()
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         score = 0;
 
         // reset level
-        level = Level.Outside;
+        level = Level.Forest;
         groundLeft = 20;
     }
 
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
         if (groundLeft <= 0)
 		{
             // random on new level
-            level = level == Level.Inside ? Level.Outside : Level.Inside;
+            level = level == Level.Classroom ? Level.Forest : Level.Classroom;
 
             // random on level duration (int), between [3, 25]
             groundLeft = 20;
