@@ -6,18 +6,18 @@ public class ProbabilityFunction :MonoBehaviour
 {
 	[SerializeField] GameObject[] coins;
 
-	// get type of coin 
+	// get type of coin --> uniform
 	// return GameObject 
 
-	// get Level 
+	// get Level --> Bernoulli
 	// return Level
 
-	// get level duration (int), between [3, 25]
+	// get level duration (int), between [3, 25] --> geometrical
 	// return [3,25]
 
-	// get position between (-1, 0, 1) (for coin or obstacle)
+	// get position between (-1, 0, 1) (for coin or obstacle) --> Binomial
 	// return -1, 0, 1
 
-	// get type of obstacle
+	// get type of obstacle --> Poisson
 	// return gameObject
 }
