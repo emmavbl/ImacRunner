@@ -5,9 +5,10 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     GroundSpawner spawner;
-    [SerializeField] GameObject obstacle;
     [SerializeField] GameObject coin;
     [SerializeField] GameObject ticket;
+    [SerializeField] GameObject pointCrous;
+    [SerializeField] SerializableDictionary<Level, GameObject> obstacles;
     [SerializeField] GameObject[] trees;
 
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class Ground : MonoBehaviour
         position.x = Random.Range(-1, 2) * (10/3); // random between a b and c position
         position.y = 0.5f;
         position.z = position.z + 5;
-        Instantiate(obstacle, position, Quaternion.identity, transform);
+        Instantiate(obstacles[GameManager.level], position, Quaternion.identity, transform);
 	}
 
     public void spawnCoin()
@@ -38,9 +39,18 @@ public class Ground : MonoBehaviour
         position.y = 0.7f;
 
         //get random type of coin here
-        GameObject toInstance = Random.Range(0.0f,1.0f) > 0.5 ? coin : ticket;
+        var random = Random.Range(0.0f, 1.0f);
+        GameObject instance = pointCrous;
+        if (random > 0.66)
+		{
+            instance = coin;
+		}
+		else if (random < 0.33)
+		{
+            instance = ticket;
+		}
 
-        Instantiate(toInstance, position, Quaternion.identity, transform);
+        Instantiate(instance, position, Quaternion.identity, transform);
     }
 
     public void spawnTree()

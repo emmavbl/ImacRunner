@@ -14,11 +14,18 @@ public enum Level
 public class GameManager : MonoBehaviour
 {
 
-    static public int score;
-    static public int highScore;
+    static public int scoreImac;
+    static public int scoreBdi;
+    static public int scoreCrous;
+
+	public Text bdiScoreText;
+	public Text imacScoreText;
+	public Text crousScoreText;
+
+	static public int highScore;
     public static GameManager inst;
 
-    public Level level = Level.Forest;
+    static public Level level = Level.Forest;
     [SerializeField] int groundLeft = 20; // number of ground spawn left before next level
 
 	private void Awake()
@@ -35,36 +42,43 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void setScore()
-	{
-		if (score >= highScore)
-		{
-            highScore = score;
-		}
-	}
 
     public void resetGame()
     {
         // reset score
-        score = 0;
+        scoreImac = 0;
+        scoreBdi = 0;
+        scoreCrous = 0;
 
         // reset level
         level = Level.Forest;
         groundLeft = 20;
     }
 
-    public void setText()
-	{
-        FindObjectsOfType<ScoreText>()[1].GetComponent<Text>().text = "Score : " + score;
-        Debug.Log(FindObjectsOfType<ScoreText>()[1].GetComponent<Text>().text);
-        Debug.Log(score);
-        FindObjectsOfType<ScoreText>()[0].GetComponent<Text>().text = "HighScore : " + highScore;
-    }
 
-    public void IncrementScore()
+    public void IncrementScore(Type typeOfCoin)
     {
-        score++;
-        FindObjectOfType<PlayerController>().scoreText.text = "SCORE : " + score;
+        Debug.Log(typeOfCoin);
+
+		switch (typeOfCoin)
+		{
+			case Type.Coin:
+                scoreImac++;
+                break;
+			case Type.Ticket:
+                scoreBdi++;
+                break;
+            case Type.Point:
+                scoreCrous++;
+                break;
+			default:
+                Debug.Log("error");
+				break;
+		}
+
+        bdiScoreText.text = "BDI : " + scoreBdi;
+        imacScoreText.text = "IMAC : " + scoreImac;
+        crousScoreText.text = "CROUS : " + scoreCrous;
 
         // Increase the player speed
         FindObjectOfType<PlayerController>().speed += FindObjectOfType<PlayerController>().speedIncreasePerPoint;
@@ -77,7 +91,7 @@ public class GameManager : MonoBehaviour
         if (groundLeft <= 0)
 		{
             // random on new level
-            level = level == Level.Classroom ? Level.Forest : Level.Classroom;
+            level = level == Level.Classroom ? Level.City : Level.Classroom;
 
             // random on level duration (int), between [3, 25]
             groundLeft = 20;

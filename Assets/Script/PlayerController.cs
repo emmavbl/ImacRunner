@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Text scoreText;
     [SerializeField] float laneSize = 10 / 3;
     [SerializeField] float turnspeed = 5;
     public float speed = 5;
@@ -79,9 +78,7 @@ public class PlayerController : MonoBehaviour
         alive = false;
 
         FindObjectOfType<AudioManager>().play("PlayerDeath");
-        FindObjectOfType<GameManager>().setScore();
         
-        //set death animation
 
         Invoke("gameOver", 1);
         

@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Type
+{
+    Coin,
+    Ticket,
+    Point
+}
+
 public class Coin : MonoBehaviour
 {
+    [SerializeField] Type typeOfCoin;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player")
         {
             FindObjectOfType<AudioManager>().play("PickUp");
-            FindObjectOfType<GameManager>().IncrementScore();
-            Debug.Log("coin");
+            FindObjectOfType<GameManager>().IncrementScore(typeOfCoin);
+    
             Destroy(gameObject);
         }
 
