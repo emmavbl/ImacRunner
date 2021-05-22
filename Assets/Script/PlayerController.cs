@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Text scoreText;
-    [SerializeField] float laneSize = 10/3;
+    [SerializeField] float laneSize = 10 / 3;
+    [SerializeField] float turnspeed = 5;
     public float speed = 5;
     public float speedIncreasePerPoint = .05f;
     bool alive = true;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
 		if (alive)
 		{
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * turnspeed);
 		}
     }
 
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().play("PlayerDeath");
         FindObjectOfType<GameManager>().setScore();
         
+        //set death animation
 
         Invoke("gameOver", 1);
         
