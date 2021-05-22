@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Text scoreText;
+
     [SerializeField] float laneSize = 10/3;
     public float speed = 5;
     public float speedIncreasePerPoint = .05f;
