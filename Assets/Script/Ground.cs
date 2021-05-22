@@ -8,6 +8,7 @@ public class Ground : MonoBehaviour
     [SerializeField] GameObject obstacle;
     [SerializeField] GameObject coin;
     [SerializeField] GameObject ticket;
+    [SerializeField] GameObject pointCrous;
     [SerializeField] GameObject[] trees;
 
     // Start is called before the first frame update
@@ -38,9 +39,18 @@ public class Ground : MonoBehaviour
         position.y = 0.7f;
 
         //get random type of coin here
-        GameObject toInstance = Random.Range(0.0f,1.0f) > 0.5 ? coin : ticket;
+        var random = Random.Range(0.0f, 1.0f);
+        GameObject instance = pointCrous;
+        if (random > 0.66)
+		{
+            instance = coin;
+		}
+		else if (random < 0.33)
+		{
+            instance = ticket;
+		}
 
-        Instantiate(toInstance, position, Quaternion.identity, transform);
+        Instantiate(instance, position, Quaternion.identity, transform);
     }
 
     public void spawnTree()

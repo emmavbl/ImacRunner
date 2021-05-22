@@ -341,7 +341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279605385e5d8af4da360d34c2a745ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 476102819}
   laneSize: 3.3333333
   speed: 20
   speedIncreasePerPoint: 0.01
@@ -440,6 +439,85 @@ RectTransform:
   m_AnchoredPosition: {x: 156, y: -51}
   m_SizeDelta: {x: 239.1, y: 54.399994}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &656668894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 656668895}
+  - component: {fileID: 656668897}
+  - component: {fileID: 656668896}
+  m_Layer: 5
+  m_Name: Crous_score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &656668895
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656668894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1555803491}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 434.9, y: -51}
+  m_SizeDelta: {x: 239.1, y: 54.399994}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &656668896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656668894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede, type: 3}
+    m_FontSize: 34
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 89
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'CROUS : 0'
+--- !u!222 &656668897
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656668894}
+  m_CullTransparentMesh: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +861,10 @@ PrefabInstance:
       propertyPath: imacScoreText
       value: 
       objectReference: {fileID: 1761505332}
+    - target: {fileID: 1181199246779498778, guid: 260ce2d30e2ef8d48a67af3dbd90b537, type: 3}
+      propertyPath: crousScoreText
+      value: 
+      objectReference: {fileID: 656668896}
     - target: {fileID: 1181199246779498779, guid: 260ce2d30e2ef8d48a67af3dbd90b537, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1061,6 +1143,7 @@ RectTransform:
   - {fileID: 172577264}
   - {fileID: 476102821}
   - {fileID: 1761505331}
+  - {fileID: 656668895}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1383,7 +1466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 399.4, y: -51}
+  m_AnchoredPosition: {x: 276.2, y: -51}
   m_SizeDelta: {x: 239.1, y: 54.399994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1761505332

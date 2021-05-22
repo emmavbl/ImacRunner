@@ -11,13 +11,28 @@ public class ScoreText : MonoBehaviour
 		switch (gameObject.name)
 		{
 			case "HighScore":
-				this.GetComponent<Text>().text = GameManager.scoreBdi > GameManager.scoreImac ? "Tu fais parties du bureau du BDI, toi ?" : "Tu as réussi tous tes partiels, non ?";
+				if( GameManager.scoreCrous > GameManager.scoreImac & GameManager.scoreCrous > GameManager.scoreBdi)
+				{
+					this.GetComponent<Text>().text =  "T'es crous ?";
+				}
+				else if (GameManager.scoreBdi > GameManager.scoreImac & GameManager.scoreBdi > GameManager.scoreCrous)
+				{
+					this.GetComponent<Text>().text = "Tu fais parties du bureau du BDI, toi ?";
+				}
+				else
+				{
+					this.GetComponent<Text>().text = "Tu as réussi tous tes partiels, non ? ";
+				}
+
 				break;
 			case "BdiScore":
 				this.GetComponent<Text>().text = "BDI : " + GameManager.scoreBdi;
 				break;
 			case "ImacScore":
 				this.GetComponent<Text>().text = "IMAC : " + GameManager.scoreImac;
+				break;
+			case "CrousScore":
+				this.GetComponent<Text>().text = "CROUS : " + GameManager.scoreCrous;
 				break;
 			default:
 				break;

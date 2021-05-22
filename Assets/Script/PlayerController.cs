@@ -77,9 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         alive = false;
 
-        FindObjectOfType<AudioManager>().play("PlayerDeath");
-        FindObjectOfType<GameManager>().setScore();
-        
+        FindObjectOfType<AudioManager>().play("PlayerDeath");        
 
         Invoke("gameOver", 1);
         

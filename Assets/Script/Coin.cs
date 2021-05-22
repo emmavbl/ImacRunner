@@ -5,7 +5,8 @@ using UnityEngine;
 public enum Type
 {
     Coin,
-    Ticket
+    Ticket,
+    Point
 }
 
 public class Coin : MonoBehaviour
