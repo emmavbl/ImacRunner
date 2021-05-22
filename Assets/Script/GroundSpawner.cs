@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-
-    [SerializeField] GameObject groundTile;
-    [SerializeField] GameObject insideTile;
-    [SerializeField] GameObject outsideTile;
-    [SerializeField] GameObject cityTile;
+    [SerializeField] SerializableDictionary<Level, GameObject> grounds;
     Vector3 nextSpawnPoint;
 
     // Start is called before the first frame update
@@ -31,25 +27,11 @@ public class GroundSpawner : MonoBehaviour
     public void spawnTile(bool spawnObstacle)
 	{
 
-        GameObject temp;
-		//GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
-
-		switch (GameObject.FindObjectOfType<GameManager>().level)
+		GameObject temp = Instantiate(grounds[GameManager.level], nextSpawnPoint, Quaternion.identity);
+        if (GameManager.level == Level.Forest)
 		{
-            case Level.Forest:
-                temp = Instantiate(outsideTile, nextSpawnPoint, Quaternion.identity);
                 temp.GetComponent<Ground>().spawnTree();
-                break;
-            case Level.Classroom:
-                temp = Instantiate(insideTile, nextSpawnPoint, Quaternion.identity);
-                break;
-            case Level.City:
-                temp = Instantiate(cityTile, nextSpawnPoint, Quaternion.identity);
-                break;
-            default:
-                temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
-                break;
-        }
+		}
 
         nextSpawnPoint = temp.transform.Find("SpawnPoint").transform.position;
 		if (spawnObstacle)

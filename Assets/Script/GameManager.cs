@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	static public int highScore;
     public static GameManager inst;
 
-    public Level level = Level.Forest;
+    static public Level level = Level.Forest;
     [SerializeField] int groundLeft = 20; // number of ground spawn left before next level
 
 	private void Awake()
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         if (groundLeft <= 0)
 		{
             // random on new level
-            level = level == Level.Classroom ? Level.Forest : Level.Classroom;
+            level = level == Level.Classroom ? Level.City : Level.Classroom;
 
             // random on level duration (int), between [3, 25]
             groundLeft = 20;

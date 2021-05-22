@@ -1606,10 +1606,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9d0ab4ace063d4bbd7c9fd12e98ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 3234278813438140237, guid: b7a30f9ace4988648aad0a138be7a820, type: 3}
-  insideTile: {fileID: 8807747406964753946, guid: e49e9c6c5a7bcc442b69564c7fe45b48, type: 3}
-  outsideTile: {fileID: 4051407508383093703, guid: cbff66586f3769b4386d8bdbd54edd21, type: 3}
-  cityTile: {fileID: 8623897049391990958, guid: 879b5c1aa013687499c8a7adfd8f6d5f, type: 3}
+  grounds:
+    array:
+    - Key: 0
+      Value: {fileID: 4051407508383093703, guid: cbff66586f3769b4386d8bdbd54edd21, type: 3}
+    - Key: 1
+      Value: {fileID: 8807747406964753946, guid: e49e9c6c5a7bcc442b69564c7fe45b48, type: 3}
+    - Key: 2
+      Value: {fileID: 8623897049391990958, guid: 879b5c1aa013687499c8a7adfd8f6d5f, type: 3}
 --- !u!4 &2024743770
 Transform:
   m_ObjectHideFlags: 0

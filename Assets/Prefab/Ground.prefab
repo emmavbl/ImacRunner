@@ -245,10 +245,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa298796aa5ebe4f92309a8b1697aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 982952955766131199, guid: 26a31e443518afd49a8f0128d9195829, type: 3}
+  obstacle: {fileID: 2159964923586730522, guid: 07a9b57666e4b7045a4c4ddb4afad101, type: 3}
   coin: {fileID: 1196859053242310938, guid: 5d81bbfbb339b644ab868ec41d6b392f, type: 3}
   ticket: {fileID: 7987518161300946532, guid: 91c1f441862804b42acc6d1a91e438da, type: 3}
   pointCrous: {fileID: 1685782025051185826, guid: 508c526ae392d6349ab235f36cc9204d, type: 3}
+  obstacles:
+    array:
+    - Key: 0
+      Value: {fileID: 2159964923586730522, guid: 07a9b57666e4b7045a4c4ddb4afad101, type: 3}
+    - Key: 1
+      Value: {fileID: 7975532086020366103, guid: c7617500cf3201b49be9804abd770c1b, type: 3}
+    - Key: 2
+      Value: {fileID: 421051067772949733, guid: 300ff886fc780f54a81f21e33c738666, type: 3}
   trees:
   - {fileID: 919132149155446097, guid: d3147994f6c08b74980e79eb9e7ee1ad, type: 3}
   - {fileID: 919132149155446097, guid: d5558e2564279de438f6e8a3b0f5e593, type: 3}
