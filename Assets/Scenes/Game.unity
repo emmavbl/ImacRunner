@@ -345,7 +345,7 @@ MonoBehaviour:
   laneSize: 3.3333333
   turnspeed: 5
   speed: 20
-  speedIncreasePerPoint: 0.01
+  speedIncreasePerPoint: 0.1
 --- !u!54 &428347899
 Rigidbody:
   m_ObjectHideFlags: 0
