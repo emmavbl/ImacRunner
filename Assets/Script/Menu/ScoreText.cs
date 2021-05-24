@@ -13,26 +13,26 @@ public class ScoreText : MonoBehaviour
 			case "HighScore":
 				if( GameManager.scoreCrous > GameManager.scoreImac & GameManager.scoreCrous > GameManager.scoreBdi)
 				{
-					this.GetComponent<Text>().text =  "T'es crous ?";
+					this.GetComponent<Text>().text =  "T'es super Crous, ça c'est sûr!";
 				}
 				else if (GameManager.scoreBdi > GameManager.scoreImac & GameManager.scoreBdi > GameManager.scoreCrous)
 				{
-					this.GetComponent<Text>().text = "Tu fais parties du bureau du BDI, toi ?";
+					this.GetComponent<Text>().text = "T'as fait le plein en ticket conso !";
 				}
 				else
 				{
-					this.GetComponent<Text>().text = "Tu as réussi tous tes partiels, non ? ";
+					this.GetComponent<Text>().text = "T'as passer tous tes UE, respect !";
 				}
 
 				break;
 			case "BdiScore":
-				this.GetComponent<Text>().text = "BDI : " + GameManager.scoreBdi;
+				this.GetComponent<Text>().text = ": " + GameManager.scoreBdi;
 				break;
 			case "ImacScore":
-				this.GetComponent<Text>().text = "IMAC : " + GameManager.scoreImac;
+				this.GetComponent<Text>().text = ": " + GameManager.scoreImac;
 				break;
 			case "CrousScore":
-				this.GetComponent<Text>().text = "CROUS : " + GameManager.scoreCrous;
+				this.GetComponent<Text>().text = ": " + GameManager.scoreCrous;
 				break;
 			default:
 				break;

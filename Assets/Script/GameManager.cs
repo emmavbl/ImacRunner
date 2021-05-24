@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 
-        bdiScoreText.text = "BDI : " + scoreBdi;
-        imacScoreText.text = "IMAC : " + scoreImac;
-        crousScoreText.text = "CROUS : " + scoreCrous;
+        bdiScoreText.text = ": " + scoreBdi;
+        imacScoreText.text = ": " + scoreImac;
+        crousScoreText.text = ": " + scoreCrous;
 
         // Increase the player speed
         FindObjectOfType<PlayerController>().speed += FindObjectOfType<PlayerController>().speedIncreasePerPoint;
