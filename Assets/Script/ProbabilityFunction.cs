@@ -70,7 +70,7 @@ public class ProbabilityFunction :MonoBehaviour
 	public int LevelDuration()
     {
 		float p = 0.5f;
-		int k = Random.Range(3, 10);
+		int k = Random.Range(3, 5);
 		float geometrical = p * Mathf.Pow(1 - p, k - 1); //Calculate geometrical value with p : 0.5 and k in [3,10]
 		int amountOfTiles = (int)(geometrical * 100 + 5);
 		amountOfTilesGenerated.Add(amountOfTiles);
@@ -81,29 +81,43 @@ public class ProbabilityFunction :MonoBehaviour
 	// get position between (-1, 0, 1) (for coin or obstacle) --> Binomial
 	// return -1, 0, 1
 
-	/*public int GetCoinPosition()
+	public int GetCoinPosition()
 	{
-		int maxRange = 20;
+		int maxRange = 25; //To get a wide range of values
 		float p = Random.Range(0f, 1.0f); //We define a probability p for the Binomial law
 		int k = Random.Range(0, maxRange); // we set an n to calculate B(n,p)
 		int binomial = Binomial(k, maxRange); // We get the binomial coefficient 
 		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k); // binomial formula
+		if (binomialLaw < 2) { return -1; } //Density of values found with a Python graph
+		if (binomialLaw < 7) { return 0; }
+		else { return 1; }
+	}
 
-	}*/
-
-	// get type of obstacle --> Poisson
+	// get position of obstacle --> Poisson
 	// return gameObject
+	public int getObstaclePosition()
+    {
+		int maxRange = 1000; //To get a wide range of values
+		int lambda = 5;
+		int k = Random.Range(0, maxRange);
+		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
+		if (poisson < 4) { return -1; } //Density of values found with a Python graph
+		if (poisson < 7) { return 0; }
+		else { return 1; }
 
+	}
 
+	public int Factorial(int n)
+    {
+		if (n == 0) return (1);
 
+		return (n * Factorial(n - 1));
+	}
 	public int Binomial(int k, int n)
     {
-		int nF = 1;
-		for(int i=1;i < n; i++){ nF = nF*i; } // Computing n!
-		int kF = 1;
-		for (int i = 1; i < k; i++) { kF = kF * i; } // Computing k!
-		int n_kF = 1;
-		for (int i = 1; i < n - k; i++) { n_kF = n_kF * i; } // Computing (n-k)!
+		int nF = Factorial(n); // Computing n!
+		int kF = Factorial(k); // Computing k!
+		int n_kF = Factorial(n - k); // Computing (n-k)!
 		return nF / (kF * n_kF); // Returning n!/k!(n-k)!
     }
 }
