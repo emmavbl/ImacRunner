@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,19 @@ using UnityEngine;
 public class ProbabilityFunction :MonoBehaviour
 {
 	[SerializeField] GameObject[] coins;
-	List<int> coinsPicked; //Store picked coins for data review
-	List<Level> levelsSpawned; //Levels Spawned for data review
-	List<int> amountOfTilesGenerated;
+	public List<int> coinsPicked; //Store picked coins for data review
+	public List<int> levelsSpawned; //Levels Spawned for data review
+	public List<int> amountOfTilesGenerated;
+	public List<int> coinPositions; //Coin Positions for data review
+	public List<int> obstaclePositions; //Obstacles Positions for data review
+
+	string saveFile;
+
 	// get type of coin --> uniform
 	// return GameObject 
 	GameObject getCoinType() {
 		int index = Random.Range(0, 2); //We pick a coin type evenly in the coins[] list and return it
-		coinsPicked.Add(index);
+		//coinsPicked.Add(index);
 		return coins[index];
 	}
 
@@ -61,7 +67,9 @@ public class ProbabilityFunction :MonoBehaviour
 				next = Level.City; //We'll set it to 3rd level after
 			}
 		}
-		levelsSpawned.Add(next);
+		if(next == Level.City) { levelsSpawned.Add(0); }
+		if (next == Level.Forest) { levelsSpawned.Add(1); }
+		if (next == Level.Classroom) { levelsSpawned.Add(2); }
 		return next;
     }
 
@@ -88,9 +96,9 @@ public class ProbabilityFunction :MonoBehaviour
 		int k = Random.Range(0, maxRange); // we set an n to calculate B(n,p)
 		int binomial = Binomial(k, maxRange); // We get the binomial coefficient 
 		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k); // binomial formula
-		if (binomialLaw < 2) { return -1; } //Density of values found with a Python graph
-		if (binomialLaw < 7) { return 0; }
-		else { return 1; }
+		if (binomialLaw < 2) { coinPositions.Add(-1); return -1; } //Density of values found with a Python graph
+		if (binomialLaw < 7) { coinPositions.Add(0); return 0; }
+		else { coinPositions.Add(1); return 1; }
 	}
 
 	// get position of obstacle --> Poisson
@@ -101,9 +109,9 @@ public class ProbabilityFunction :MonoBehaviour
 		int lambda = 5;
 		int k = Random.Range(0, maxRange);
 		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
-		if (poisson < 4) { return -1; } //Density of values found with a Python graph
-		if (poisson < 7) { return 0; }
-		else { return 1; }
+		if (poisson < 4) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
+		if (poisson < 7) { obstaclePositions.Add(0); return 0; }
+		else { obstaclePositions.Add(1); return 1; }
 
 	}
 
@@ -120,4 +128,24 @@ public class ProbabilityFunction :MonoBehaviour
 		int n_kF = Factorial(n - k); // Computing (n-k)!
 		return nF / (kF * n_kF); // Returning n!/k!(n-k)!
     }
+
+    private void Update()
+    {
+		if (Input.GetKeyDown("p"))
+		{
+			export();
+			Debug.Log(Application.persistentDataPath);
+		}
+	}
+
+	void Awake()
+	{
+		// Update the path once the persistent path exists.
+		saveFile = Application.persistentDataPath + "/gamedata.json";
+	}
+	public void export()
+    {
+		
+		File.WriteAllText(saveFile, JsonUtility.ToJson(this));
+	}
 }
