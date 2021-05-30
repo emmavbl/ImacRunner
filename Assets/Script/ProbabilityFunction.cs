@@ -79,7 +79,7 @@ public class ProbabilityFunction :MonoBehaviour
     {
 		float p = 0.5f;
 		int k = Random.Range(3, 5);
-		float geometrical = p * Mathf.Pow(1 - p, k - 1); //Calculate geometrical value with p : 0.5 and k in [3,10]
+		float geometrical = p * Mathf.Pow(1 - p, k - 1); //Calculate geometrical value with p : 0.5 and k in [3,5]
 		int amountOfTiles = (int)(geometrical * 100 + 5);
 		amountOfTilesGenerated.Add(amountOfTiles);
 		return amountOfTiles; //we get an int for the number of tiles to generate
@@ -102,16 +102,30 @@ public class ProbabilityFunction :MonoBehaviour
 	}
 
 	// get position of obstacle --> Poisson
-	// return gameObject
+	// return gameObject //must respect coin positions public List<int> coinPositions;
 	public int getObstaclePosition()
     {
+		int coinPos = -2;
+		if (coinPositions.Count > 0)
+		{
+			coinPos = coinPositions[coinPositions.Count - 1];
+		}
 		int maxRange = 1000; //To get a wide range of values
 		int lambda = 5;
 		int k = Random.Range(0, maxRange);
 		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
-		if (poisson < 4) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
-		if (poisson < 7) { obstaclePositions.Add(0); return 0; }
-		else { obstaclePositions.Add(1); return 1; }
+		if (poisson < 4 && coinPos != -1) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
+		if (poisson < 7 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
+		else { 
+			if (coinPos == 1 )
+            {
+				obstaclePositions.Add(0); return 0;
+			}
+			else
+            {
+                obstaclePositions.Add(1); return 1;
+			}
+		}
 
 	}
 
