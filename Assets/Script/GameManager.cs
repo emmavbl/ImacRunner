@@ -91,10 +91,10 @@ public class GameManager : MonoBehaviour
         if (groundLeft <= 0)
 		{
             // random on new level
-            level = level == Level.Classroom ? Level.City : Level.Classroom;
+            level = ProbabilityFunction.GetLevel(level);
 
             // random on level duration (int), between [3, 25]
-            groundLeft = 20;
+            groundLeft = ProbabilityFunction.LevelDuration();
 
 		}
 	}

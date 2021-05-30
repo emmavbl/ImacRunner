@@ -5,26 +5,28 @@ using UnityEngine;
 
 public class ProbabilityFunction :MonoBehaviour
 {
-	[SerializeField] GameObject[] coins;
-	public List<int> coinsPicked; //Store picked coins for data review
-	public List<int> levelsSpawned; //Levels Spawned for data review
-	public List<int> amountOfTilesGenerated;
-	public List<int> coinPositions; //Coin Positions for data review
-	public List<int> obstaclePositions; //Obstacles Positions for data review
+
+	static public List<int> coinsPicked = new List<int>(); //Store picked coins for data review
+	static public List<int> levelsSpawned = new List<int>(); //Levels Spawned for data review
+	static public List<int> amountOfTilesGenerated = new List<int>();
+	static public List<int> coinPositions = new List<int>(); //Coin Positions for data review
+	static public List<int> obstaclePositions = new List<int>(); //Obstacles Positions for data review
 
 	string saveFile;
 
 	// get type of coin --> uniform
 	// return GameObject 
-	GameObject getCoinType() {
-		int index = Random.Range(0, 2); //We pick a coin type evenly in the coins[] list and return it
-		//coinsPicked.Add(index);
+
+	
+	static public GameObject getCoinType(List<GameObject> coins) {
+		int index = Random.Range(0, coins.Count); //We pick a coin type evenly in the coins[] list and return it
+		coinsPicked.Add(index);
 		return coins[index];
 	}
 
 	// get Level --> Bernoulli
 	// return Level
-	public Level GetLevel(Level actual)
+	static public Level GetLevel(Level actual)
     {
 		Level next = actual;
 		//We define a probability p for the next level to happen then get the level
@@ -75,7 +77,7 @@ public class ProbabilityFunction :MonoBehaviour
 
 	// get level duration (int), between [3, 25] --> geometrical (formula : q^(k-1)*p)
 	// return [3,25]
-	public int LevelDuration()
+	static public int LevelDuration()
     {
 		float p = 0.5f;
 		int k = Random.Range(3, 5);
@@ -89,7 +91,7 @@ public class ProbabilityFunction :MonoBehaviour
 	// get position between (-1, 0, 1) (for coin or obstacle) --> Binomial
 	// return -1, 0, 1
 
-	public int GetCoinPosition()
+	static public int GetCoinPosition()
 	{
 		int maxRange = 25; //To get a wide range of values
 		float p = Random.Range(0f, 1.0f); //We define a probability p for the Binomial law
@@ -97,13 +99,13 @@ public class ProbabilityFunction :MonoBehaviour
 		int binomial = Binomial(k, maxRange); // We get the binomial coefficient 
 		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k); // binomial formula
 		if (binomialLaw < 2) { coinPositions.Add(-1); return -1; } //Density of values found with a Python graph
-		if (binomialLaw < 7) { coinPositions.Add(0); return 0; }
+		else if (binomialLaw < 7) { coinPositions.Add(0); return 0; }
 		else { coinPositions.Add(1); return 1; }
 	}
 
 	// get position of obstacle --> Poisson
 	// return gameObject //must respect coin positions public List<int> coinPositions;
-	public int getObstaclePosition()
+	static public int getObstaclePosition()
     {
 		int coinPos = -2;
 		if (coinPositions.Count > 0)
@@ -115,7 +117,7 @@ public class ProbabilityFunction :MonoBehaviour
 		int k = Random.Range(0, maxRange);
 		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
 		if (poisson < 4 && coinPos != -1) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
-		if (poisson < 7 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
+		else if (poisson < 7 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
 		else { 
 			if (coinPos == 1 )
             {
@@ -129,13 +131,13 @@ public class ProbabilityFunction :MonoBehaviour
 
 	}
 
-	public int Factorial(int n)
+	static public int Factorial(int n)
     {
 		if (n == 0) return (1);
 
 		return (n * Factorial(n - 1));
 	}
-	public int Binomial(int k, int n)
+	static public int Binomial(int k, int n)
     {
 		int nF = Factorial(n); // Computing n!
 		int kF = Factorial(k); // Computing k!
@@ -143,10 +145,11 @@ public class ProbabilityFunction :MonoBehaviour
 		return nF / (kF * n_kF); // Returning n!/k!(n-k)!
     }
 
-    private void Update()
+	private void Update()
     {
 		if (Input.GetKeyDown("p"))
 		{
+			Debug.Log("Hello");
 			export();
 			Debug.Log(Application.persistentDataPath);
 		}
@@ -159,7 +162,8 @@ public class ProbabilityFunction :MonoBehaviour
 	}
 	public void export()
     {
-		
-		File.WriteAllText(saveFile, JsonUtility.ToJson(this));
+		Debug.Log(obstaclePositions);
+		var result = new ProbabilityResult();
+		File.WriteAllText(saveFile, JsonUtility.ToJson(result));
 	}
 }
