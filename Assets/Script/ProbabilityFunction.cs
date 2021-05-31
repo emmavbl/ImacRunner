@@ -93,11 +93,12 @@ public class ProbabilityFunction :MonoBehaviour
 
 	static public int GetCoinPosition()
 	{
-		int maxRange = 25; //To get a wide range of values
-		float p = Random.Range(0f, 1.0f); //We define a probability p for the Binomial law
-		int k = Random.Range(0, maxRange); // we set an n to calculate B(n,p)
+		int maxRange = 10; //To get a wide range of values
+		float p = Random.Range(0.5f, 1.0f); //We define a probability p for the Binomial law
+		int k = Random.Range(5, maxRange); // we set an n to calculate B(n,p)
 		int binomial = Binomial(k, maxRange); // We get the binomial coefficient 
-		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k); // binomial formula
+		//Debug.Log(binomial);
+		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k) * 100; // binomial formula
 		Debug.Log("binomial : " + binomialLaw);
 		if (binomialLaw < 2) { coinPositions.Add(-1); return -1; } //Density of values found with a Python graph
 		else if (binomialLaw < 7) { coinPositions.Add(0); return 0; }
@@ -113,13 +114,13 @@ public class ProbabilityFunction :MonoBehaviour
 		{
 			coinPos = coinPositions[coinPositions.Count - 1];
 		}
-		int maxRange = 1000; //To get a wide range of values
-		int lambda = 5;
-		int k = Random.Range(0, maxRange);
-		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
+		int maxRange = 25; //To get a wide range of values
+		int lambda = 3;
+		int k = Random.Range(20, maxRange);
+		float poisson = (Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
 		Debug.Log("Poisson : " + poisson);
-		if (poisson < 4 && coinPos != -1) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
-		else if (poisson < 7 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
+		if (poisson < -10 && coinPos != -1) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
+		else if (poisson < 0 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
 		else { 
 			if (coinPos == 1 )
             {
@@ -145,10 +146,12 @@ public class ProbabilityFunction :MonoBehaviour
 		int kF = Factorial(k); // Computing k!
 		int n_kF = Factorial(n - k); // Computing (n-k)!
 		return nF / (kF * n_kF); // Returning n!/k!(n-k)!
+
     }
 
 	private void Update()
     {
+		Debug.Log(GetCoinPosition());
 		if (Input.GetKeyDown("p"))
 		{
 			Debug.Log("Hello");
