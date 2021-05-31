@@ -26,7 +26,8 @@ public class Ground : MonoBehaviour
     public void spawnObstacle()
 	{
         Vector3 position = transform.position;
-        position.x = ProbabilityFunction.getObstaclePosition() * (10/3); // random between a b and c position
+        //position.x = ProbabilityFunction.getObstaclePosition() * (10/3); // random between a b and c position
+        position.x = Random.Range(-1,2) * (10/3); // random between a b and c position
         position.y = 0.5f;
         position.z = position.z + 5;
         Instantiate(obstacles[GameManager.level], position, Quaternion.identity, transform);
@@ -35,7 +36,8 @@ public class Ground : MonoBehaviour
     public void spawnCoin()
     {
         Vector3 position = transform.position;
-        position.x = ProbabilityFunction.GetCoinPosition() * (10/3); // random between a b and c position
+        //position.x = ProbabilityFunction.GetCoinPosition() * (10/3); // random between a b and c position
+        position.x = Random.Range(-1,2) * (10/3); // random between a b and c position
         position.y = 0.7f;
 
         Instantiate(ProbabilityFunction.getCoinType(new List<GameObject>() { coin, ticket, pointCrous }),

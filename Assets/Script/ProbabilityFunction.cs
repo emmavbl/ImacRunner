@@ -98,6 +98,7 @@ public class ProbabilityFunction :MonoBehaviour
 		int k = Random.Range(0, maxRange); // we set an n to calculate B(n,p)
 		int binomial = Binomial(k, maxRange); // We get the binomial coefficient 
 		float binomialLaw = binomial * Mathf.Pow(p, k) * Mathf.Pow((1 - p), maxRange - k); // binomial formula
+		Debug.Log("binomial : " + binomialLaw);
 		if (binomialLaw < 2) { coinPositions.Add(-1); return -1; } //Density of values found with a Python graph
 		else if (binomialLaw < 7) { coinPositions.Add(0); return 0; }
 		else { coinPositions.Add(1); return 1; }
@@ -116,6 +117,7 @@ public class ProbabilityFunction :MonoBehaviour
 		int lambda = 5;
 		int k = Random.Range(0, maxRange);
 		int poisson = (int)(Mathf.Pow(lambda, k) * Mathf.Exp(-lambda) / Factorial(k));
+		Debug.Log("Poisson : " + poisson);
 		if (poisson < 4 && coinPos != -1) { obstaclePositions.Add(-1); return -1; } //Density of values found with a Python graph
 		else if (poisson < 7 && coinPos != 0) { obstaclePositions.Add(0); return 0; }
 		else { 
