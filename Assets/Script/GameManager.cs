@@ -14,9 +14,9 @@ public enum Level
 public class GameManager : MonoBehaviour
 {
 
-    static public int scoreImac;
-    static public int scoreBdi;
-    static public int scoreCrous;
+    static public int scoreImac = 0;
+    static public int scoreBdi = 0;
+    static public int scoreCrous = 0;
 
 	public Text bdiScoreText;
 	public Text imacScoreText;
