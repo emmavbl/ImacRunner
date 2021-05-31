@@ -13,15 +13,15 @@ public class ScoreText : MonoBehaviour
 			case "HighScore":
 				if( GameManager.scoreCrous > GameManager.scoreImac & GameManager.scoreCrous > GameManager.scoreBdi)
 				{
-					this.GetComponent<Text>().text =  "T'es super Crous, ça c'est sûr!";
+					this.GetComponent<Text>().text =  "T'es super Crous, ça c'est sûr !";
 				}
 				else if (GameManager.scoreBdi > GameManager.scoreImac & GameManager.scoreBdi > GameManager.scoreCrous)
 				{
-					this.GetComponent<Text>().text = "T'as fait le plein en ticket conso !";
+					this.GetComponent<Text>().text = "T'as fait le plein en tickets conso !";
 				}
 				else
 				{
-					this.GetComponent<Text>().text = "T'as passer tous tes UE, respect !";
+					this.GetComponent<Text>().text = "T'as passé tous tes UE, respect !";
 				}
 
 				break;
